@@ -36,4 +36,26 @@ $(document).ready(function(){
       console.log("ajax post request failed");
     });
   });
+
+  $("#put").on("click", function(){
+    var name = $("#artist-name").val();
+    var photoUrl = $("#artist-photo-url").val();
+    var nationality = $("#artist-nationality").val();
+    $.ajax({
+      type: 'PUT',
+      data: {
+        artist: {
+          photo_url: photoUrl,
+          name: name,
+          nationality: nationality
+        }
+      },
+      dataType: 'json',
+      url: "https://tunr-api.herokuapp.com/artists/8"
+    }).done(function(response){
+      console.log(response);
+    }).fail(function(){
+      console.log("failed to update");
+    });
+  });
 });
