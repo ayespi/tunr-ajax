@@ -9,8 +9,8 @@ $(document).ready(function(){
       for (var i = 0; i<response.length;i++){
         $("ul").append("<li><a href='https://tunr-api.herokuapp.com/artists/" + response[i].id + "'>" + response[i].name + "</a></li>")
       }
-    }).fail(function(response){
-      console.log("FAIL!", response);
+    }).fail(function(){
+      console.log("failed to get");
     });
   })
 
@@ -32,7 +32,7 @@ $(document).ready(function(){
     }).done(function(response) {
       console.log(response);
       $("ul.articles").append("<li><a href='/artists/" + response.id + "'>" + response.name + "</a></li>");
-    }).fail(function(response){
+    }).fail(function(){
       console.log("ajax post request failed");
     });
   });
@@ -58,4 +58,18 @@ $(document).ready(function(){
       console.log("failed to update");
     });
   });
+
+  $("#delete").on("click", function(){
+    $.ajax({
+      type: 'DELETE',
+      dataType: 'json',
+      url: "https://tunr-api.herokuapp.com/artists/9"
+    }).done(function(response){
+      console.log("DELETED");
+      console.log(response);
+    }).fail(function(){
+      console.log("failed to delete");
+    })
+  })
+
 });
